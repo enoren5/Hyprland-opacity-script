@@ -4,7 +4,7 @@
 # This version gets the global active_opacity and sets it as a multiplier for the active window.
 # If you are using Hyprland 0.48.1 or newer, check your 'windowrule' entries for conflicts.
 
-LOG_FILE="/tmp/hypr_opacity_script_v7_revisited.log"
+LOG_FILE="/dev/Hyprland-opacity-script_v8_revisited.log"
 # Replace with the actual paths found using 'which jq', 'which hyprctl', and 'which bc'
 JQ_PATH="/run/current-system/sw/bin/jq" # <-- Update this path if needed
 HYPRCTL_PATH="/run/current-system/sw/bin/hyprctl" # <-- Update this path if needed
@@ -15,7 +15,7 @@ log_message() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOG_FILE"
 }
 
-log_message "Script started (v7 revisited)"
+log_message "Script started (v8 revisited)"
 
 # Add a small delay to ensure Hyprland is ready
 sleep 0.05 # Adjust delay if necessary
@@ -98,12 +98,12 @@ fi
 log_message "Calculated new desired window opacity (after clamp and format): $NEW_DESIRED_OPACITY"
 
 # Set the calculated desired opacity as the multiplier for the active window
-${HYPRCTL_PATH} dispatch setprop address:"$ACTIVE_WINDOW_ADDRESS" alphaoverride "$NEW_DESIRED_OPACITY"
+${HYPRCTL_PATH} dispatch setprop address:"$ACTIVE_WINDOW_ADDRESS" alpha "$NEW_DESIRED_OPACITY"
 if [ $? -eq 0 ]; then
   log_message "Successfully set opacity multiplier to $NEW_DESIRED_OPACITY for $ACTIVE_WINDOW_ADDRESS"
 else
   log_message "Failed to set opacity multiplier to $NEW_DESIRED_OPACITY for $ACTIVE_WINDOW_ADDRESS. hyprctl dispatch setprop exit code: $?"
-  log_message "hyprctl dispatch setprop final output: $(${HYPRCTL_PATH} dispatch setprop address:"$ACTIVE_WINDOW_ADDRESS" alphaoverride "$NEW_DESIRED_OPACITY" 2>&1)"
+  log_message "hyprctl dispatch setprop final output: $(${HYPRCTL_PATH} dispatch setprop address:"$ACTIVE_WINDOW_ADDRESS" alpha "$NEW_DESIRED_OPACITY" 2>&1)"
 fi
 
-log_message "Script finished (v7 revisited)"
+log_message "Script finished (v8 revisited)"
