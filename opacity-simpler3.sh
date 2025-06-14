@@ -2,6 +2,9 @@
 
 # Working script for Hyprland 0.49.0 using 'alpha' instead of 'alphaoverride'
 
+LOGFILE="/tmp/hypr_opacity.log"
+echo "$(date) $0 $@" >> "$LOGFILE"
+
 STEP=0.1
 MIN=0.1
 MAX=1.0
