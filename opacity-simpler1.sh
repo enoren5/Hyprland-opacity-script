@@ -18,7 +18,7 @@ WIN_ADDR=$(hyprctl activewindow -j | jq -r '.address')
 [ -z "$WIN_ADDR" ] || [ "$WIN_ADDR" == "null" ] && { echo "No active window"; exit 1; }
 
 # Get current opacity (if set, else assume 1.0)
-CURRENT_OPACITY=$(hyprctl getprop "address:$WIN_ADDR" alphaoverride 2>/dev/null | awk '{print $2}')
+CURRENT_OPACITY=$(hyprctl getprop "address:$WIN_ADDR" alpha 2>/dev/null | awk '{print $2}')
 [ -z "$CURRENT_OPACITY" ] && CURRENT_OPACITY=$DEFAULT_OPACITY
 
 # Adjust opacity
@@ -39,5 +39,5 @@ NEW_OPACITY=$(echo "$NEW_OPACITY" | awk -v min="$MIN_OPACITY" -v max="$MAX_OPACI
 }')
 
 # Set new opacity
-hyprctl dispatch setprop "address:$WIN_ADDR" alphaoverride "$NEW_OPACITY"
+hyprctl dispatch setprop "address:$WIN_ADDR" alpha "$NEW_OPACITY"
 
