@@ -34,5 +34,7 @@ NEW=$(echo "$NEW" | awk -v min="$MIN" -v max="$MAX" '{
     printf "%.2f", $1;
 }')
 
+notify-send "Opacity Script" "Triggered: $0 $@"
+
 hyprctl dispatch setprop "address:$WIN_ADDR" alpha "$NEW"
 
