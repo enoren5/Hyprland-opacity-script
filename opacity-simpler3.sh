@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # Working script for Hyprland 0.49.0 using 'alpha' instead of 'alphaoverride'
 
